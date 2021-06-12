@@ -60,11 +60,11 @@ fn get_options() -> Result<Options, String>
 
     Ok(
         Options {
-            in_filename: in_filename,
-            out_filename: out_filename,
-            frame_size: frame_size,
-            cuttoff: cuttoff,
-            sample_rate: sample_rate,
+            in_filename,
+            out_filename,
+            frame_size,
+            cuttoff,
+            sample_rate,
         }
     )
 }

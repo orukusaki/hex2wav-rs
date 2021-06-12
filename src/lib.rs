@@ -22,15 +22,12 @@ pub fn create_audio_data(content: String, options: &Options) -> Vec<u8> {
         .into_iter()
         .flat_map(|r| r.ok())
         .fold(Vec::new(), |mut v: Vec<u8>, r| {
-            match r {
-                Record::Data{offset, mut value} => {
 
-                    while (v.len() as u16) < offset {
-                        v.push(0u8);
-                    }
-                    v.append(&mut value);
+            if let Record::Data{offset, mut value} = r {
+                while (v.len() as u16) < offset {
+                    v.push(0u8);
                 }
-                _ => ()
+                v.append(&mut value);
             }
 
             v

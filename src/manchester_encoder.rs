@@ -24,7 +24,7 @@ impl ManchesterEncoder {
             v.push(self.state);
             v.push(self.state);
 
-            b = b << 1;
+            b <<= 1;
         }
 
         v
@@ -33,10 +33,12 @@ impl ManchesterEncoder {
     pub fn stop(&mut self) -> Vec<u8> {
 
         self.state = !self.state;
+        vec![self.state, self.state]
+    }
+}
 
-        let mut v = Vec::new();
-        v.push(self.state);
-        v.push(self.state);
-        v
+impl Default for ManchesterEncoder {
+    fn default() -> Self {
+        Self::new()
     }
 }

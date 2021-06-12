@@ -46,8 +46,8 @@ impl Frame {
 
         Frame {
             command: PROGCOMMAND,
-            page_index: page_index,
-            page: page,
+            page_index,
+            page,
         }
     }
 
