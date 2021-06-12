@@ -6,8 +6,8 @@ use wav::Header;
 use wav::header::WAV_FORMAT_PCM;
 use wav::bit_depth::BitDepth;
 
-use mencoder::create_audio_data;
-use mencoder::Options;
+use hex2wav::create_audio_data;
+use hex2wav::Options;
 
 #[macro_use]
 extern crate clap;
