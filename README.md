@@ -1,8 +1,6 @@
 # hex2wav-rs
 [![Build Status](https://travis-ci.com/orukusaki/hex2wav-rs.svg?branch=main)](https://travis-ci.com/orukusaki/hex2wav-rs)
 
-hex2wav 0.1.0
-Peter Smith <peter@orukusaki.co.uk>
 Converts an intel .hex firmware file into a .wav using [Differential Manchester encoding](https://en.wikipedia.org/wiki/Differential_Manchester_encoding).
 
 Bytes are split up into frames (128 bytes by default). Each frame starts with a synchronisation sequence and page number, followed by the frame bytes, and finally a 16 bit CRC.  A special stop frame marks the end of transmission.
