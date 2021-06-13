@@ -6,6 +6,7 @@ pub use manchester_encoder::ManchesterEncoder;
 pub use frame::Frame;
 
 use ihex::{Reader, Record};
+use std::iter;
 
 pub struct Options {
     pub in_filename: String,
@@ -33,11 +34,11 @@ pub fn create_audio_data(content: String, options: &Options) -> Vec<u8> {
             v
         });
 
-    let frames = Frame::bytes_to_frames(&firmware_bytes, options.frame_size.into());
+    let frames = Frame::bytes_to_frames(&firmware_bytes, options.frame_size.into())
+        .chain(iter::once(Frame::run(options.frame_size.into())));
 
     let encoder = ManchesterEncoder::new();
     let audio_bytes = frames
-        .into_iter()
         .scan(encoder, |encoder, frame|
             {
                 let mut encoded = vec![127; 500]; // silence
