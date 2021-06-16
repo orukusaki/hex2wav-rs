@@ -12,14 +12,14 @@ script:
 before_deploy:
 - git config --local user.name "Peter Smith"
 - git config --local user.email "peter@orukusaki.co.uk"
-- name="hex2wav-$TRAVIS_TAG-$TARGET"
+- name="hex2wav-$TRAVIS_TAG-$TRAVIS_OS_NAME"
 - mkdir $name
 - cp target/$TARGET/release/hex2wav $name/
 - cp README.md LICENSE $name/
 - tar czvf $name.tar.gz $name
 deploy:
   provider: releases
-  file: hex2wav-$TRAVIS_TAG-$TARGET.tar.gz
+  file: hex2wav-$TRAVIS_TAG-$TRAVIS_OS_NAME.tar.gz
   skip_cleanup: true
   on:
     branch: main
