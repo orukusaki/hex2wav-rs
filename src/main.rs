@@ -18,14 +18,19 @@ fn main() {
         std::process::exit(1);
     });
 
-    let content = fs::read_to_string(&options.in_filename).expect("Could not load file");
-    let mut out_file =
-        File::create(Path::new(&options.out_filename)).expect("could not open output file");
+    let content = fs::read_to_string(&options.in_filename)
+        .expect("Could not load file");
+    let out_path = Path::new(&options.out_filename);
+    let mut out_file = File::create(&out_path)
+        .expect("could not open output file");
 
     let header = Header::new(WAV_FORMAT_PCM, 1, options.sample_rate, 8);
     let data = create_audio_data(content, &options);
 
-    wav::write(header, &data.into(), &mut out_file).expect("could not write wav");
+    wav::write(header, &data.into(), &mut out_file)
+        .expect("could not write wav");
+
+    println!("Wrote {}", out_path.display());
 }
 
 fn get_options() -> Result<Options, String> {
